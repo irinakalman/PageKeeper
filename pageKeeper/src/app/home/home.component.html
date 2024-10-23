@@ -1,1 +1,21 @@
-<p>home works!</p>
+<h1>Available Books</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th>Type</th>
+      <th>Author</th>
+      <th>Created On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of availableBooks">
+      <td>{{ book.name }}</td>
+      <td>{{ book.year }}</td>
+      <td>{{ book.type }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.createdOn }}</td>
+    </tr>
+  </tbody>
+</table>
