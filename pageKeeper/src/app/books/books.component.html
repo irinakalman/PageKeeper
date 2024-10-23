@@ -1,21 +1,37 @@
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Year</th>
-      <th>Type</th>
-      <th>Author</th>
-      <th>Created On</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.name }}</td>
-      <td>{{ book.year }}</td>
-      <td>{{ book.type }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.createdOn }}</td>
-    </tr>
-  </tbody>
-</table>
+    <!-- Book Name Column -->
+    <ng-container matColumnDef="bookName">
+      <th mat-header-cell *matHeaderCellDef> Book Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookName}} </td>
+    </ng-container>
+
+    <!-- Customer Name Column -->
+    <ng-container matColumnDef="bookYear">
+      <th mat-header-cell *matHeaderCellDef> Year </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookYear}} </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="bookType">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookType}} </td>
+    </ng-container>
+
+    <!-- Reserved On Column -->
+    <ng-container matColumnDef="bookAuthor">
+      <th mat-header-cell *matHeaderCellDef> Author </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookAuthor}} </td>
+    </ng-container>
+
+    <!-- Return By Column -->
+    <ng-container matColumnDef="createdOn">
+      <th mat-header-cell *matHeaderCellDef> Created On </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdOn | date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</section>

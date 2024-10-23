@@ -1,20 +1,38 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Customer</th>
-      <th>Status</th>
-      <th>Reserved on</th>
-      <th>Rreturn By</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let reservation of reservations">
-      <td>{{ reservation.book.name }}</td>
-      <td>{{ reservation.customer.name}}</td>
-      <td>{{ reservation.status }}</td>
-      <td>{{ reservation.reservedOn | date }}</td>
-      <td>{{ reservation.returnBy | date  }}</td>
-    </tr>
-  </tbody>
-</table>
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Book Name Column -->
+    <ng-container matColumnDef="bookName">
+      <th mat-header-cell *matHeaderCellDef> Book Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookName}} </td>
+    </ng-container>
+
+    <!-- Customer Name Column -->
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <!-- Reserved On Column -->
+    <ng-container matColumnDef="reservedOn">
+      <th mat-header-cell *matHeaderCellDef> Reserved On </th>
+      <td mat-cell *matCellDef="let element"> {{element.reservedOn | date}} </td>
+    </ng-container>
+
+    <!-- Return By Column -->
+    <ng-container matColumnDef="returnBy">
+      <th mat-header-cell *matHeaderCellDef> Return By </th>
+      <td mat-cell *matCellDef="let element"> {{element.returnBy | date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</section>
+
