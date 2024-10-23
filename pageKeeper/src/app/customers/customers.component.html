@@ -1,25 +1,42 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Surname</th>
-      <th>Email</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let customer of customers">
-      <td>{{ customer.name }}</td>
-      <td>{{ customer.surname }}</td>
-      <td>{{ customer.email }}</td>
-      <td>{{ customer.phoneNumber }}</td>
-      <td>
-        <!--Dummy buttons-->
-        <button (click)="viewCustomer(customer)">View</button>
-        <button (click)="editCustomer(customer)">Edit</button>
-        <button (click)="deleteCustomer(customer)">Delete</button>
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="customers">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let customer">{{ customer.name }}</td>
+    </ng-container>
+
+    <!-- Surname Column -->
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell *matHeaderCellDef>Surname</th>
+      <td mat-cell *matCellDef="let customer">{{ customer.surname }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let customer">{{ customer.email }}</td>
+    </ng-container>
+
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+      <td mat-cell *matCellDef="let customer">{{ customer.phoneNumber }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let customer">
+        <!-- Dummy buttons -->
+        <button mat-button (click)="viewCustomer(customer)">View</button>
+        <button mat-button (click)="editCustomer(customer)">Edit</button>
+        <button mat-button (click)="deleteCustomer(customer)">Delete</button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</section>
