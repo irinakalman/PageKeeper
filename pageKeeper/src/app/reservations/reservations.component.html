@@ -1,1 +1,20 @@
-<p>reservations works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Reserved on</th>
+      <th>Rreturn By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reservation of reservations">
+      <td>{{ reservation.book.name }}</td>
+      <td>{{ reservation.customer.name}}</td>
+      <td>{{ reservation.status }}</td>
+      <td>{{ reservation.reservedOn | date }}</td>
+      <td>{{ reservation.returnBy | date  }}</td>
+    </tr>
+  </tbody>
+</table>
