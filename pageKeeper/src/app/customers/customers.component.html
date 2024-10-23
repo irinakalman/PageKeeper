@@ -5,6 +5,7 @@
       <th>Surname</th>
       <th>Email</th>
       <th>Phone Number</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,12 @@
       <td>{{ customer.surname }}</td>
       <td>{{ customer.email }}</td>
       <td>{{ customer.phoneNumber }}</td>
+      <td>
+        <!--Dummy buttons-->
+        <button (click)="viewCustomer(customer)">View</button>
+        <button (click)="editCustomer(customer)">Edit</button>
+        <button (click)="deleteCustomer(customer)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
