@@ -3,16 +3,25 @@ import { HeaderComponent } from '../header/header.component';
 import { CustomerService } from '../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [HeaderComponent, CommonModule, MatTableModule, MatButtonModule],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
 })
 export class CustomersComponent implements OnInit {
-  customers: any[] = [];
+  displayedColumns: string[] = [
+    'name',
+    'surname',
+    'email',
+    'phoneNumber',
+    'actions',
+  ]; // Στήλες του πίνακα
+  customers: any[] = []; // Πηγή δεδομένων
 
   constructor(private customerService: CustomerService) {}
 
