@@ -1,9 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 section.mat-elevation-z8 {
-  max-width: 1400px;
-    margin: 0 auto;
+  margin: 25px;
+}
+
+.mat-drawer-container {
+  height: 100vh;
+
+  mat-sidenav {
+    background-color: #4a90e2;
+    border-radius: 0;
+    width: 320px;
+  }
+
+  mat-sidenav-content {
+    margin-left: 320px;
+    background-color: #F5F5F5;
+  }
+
+  mat-list {
+    display: flex !important;
+    flex-direction: column;
+    font-size: 20px;
+    gap: 55px;
+    padding: 80px 50px;
+
+    a {
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: flex;
+    align-items: flex-end;
+    }
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px!important;
+}
+
+.menu-icon {
+  width: 30px;
+  margin-right: 14px;
 }

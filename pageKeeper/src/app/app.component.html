@@ -1,2 +1,18 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened="true">
+    <mat-list>
+      <a mat-button [routerLink]="'/'" routerLinkActive="active"><img src="assets/images/home.png" alt="Home" class="menu-icon">Home</a>
+      <a mat-button [routerLink]="'/books'" routerLinkActive="active"><img src="assets/images/book.png" alt="Books" class="menu-icon">Books</a>
+      <a mat-button [routerLink]="'/reservations'" routerLinkActive="active"><img src="assets/images/booking.png" alt="Reservations" class="menu-icon">Reservations</a>
+      <a mat-button [routerLink]="'/customers'" routerLinkActive="active"><img src="assets/images/customer.png" alt="Customer" class="menu-icon">Customers</a>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Type to search">
+    </mat-form-field>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
