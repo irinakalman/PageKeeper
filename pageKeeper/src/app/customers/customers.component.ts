@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-customers',
@@ -23,7 +24,14 @@ export class CustomersComponent implements OnInit {
   ];
   customers: any[] = [];
 
-  constructor(private customerService: CustomerService) {}
+  addCustomer() {
+    console.log('Opening form to add a new customer');
+  }
+
+  constructor(
+    private customerService: CustomerService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.customerService.getCustomers().subscribe((data: any) => {

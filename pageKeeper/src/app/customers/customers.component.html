@@ -1,4 +1,5 @@
 <section class="example-container mat-elevation-z8" tabindex="0">
+  <button mat-raised-button color="primary" (click)="addCustomer()">Add New Customer</button>
   <table mat-table [dataSource]="customers">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
