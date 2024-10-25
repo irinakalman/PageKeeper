@@ -3,31 +3,50 @@ import { HeaderComponent } from '../header/header.component';
 import { BookService } from '../services/books.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule],
   templateUrl: './books.component.html',
-  styleUrl: './books.component.scss'
+  styleUrl: './books.component.scss',
 })
 export class BooksComponent implements OnInit {
-  displayedColumns: string[] = ['bookName', 'bookYear', 'bookType', 'bookAuthor', 'createdOn'];
+  displayedColumns: string[] = [
+    'bookName',
+    'bookYear',
+    'bookType',
+    'bookAuthor',
+    'createdOn',
+    'actions',
+  ];
   dataSource: any[] = [];
 
-  constructor(private bookService: BookService){}
+  constructor(private bookService: BookService) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.bookService.getBooks().subscribe((books: any[]) => {
       console.log(books);
-      this.dataSource = books.map(book => ({
+      this.dataSource = books.map((book) => ({
         bookName: book.name,
         bookYear: book.year,
         bookType: book.type,
         bookAuthor: book.author,
-        createdOn: book.createdOn
+        createdOn: book.createdOn,
       }));
-      console.log(books);
-    })
+      //console.log(books);
+    });
+  }
+  viewReservation(reservation: any) {
+    console.log('Viewing reservation:', reservation);
+  }
+
+  editReservation(reservation: any) {
+    console.log('Editing reservation:', reservation);
+  }
+
+  deleteReservation(reservation: any) {
+    console.log('Deleting reservation:', reservation);
   }
 }

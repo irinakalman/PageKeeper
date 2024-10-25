@@ -20,8 +20,8 @@ export class CustomersComponent implements OnInit {
     'email',
     'phoneNumber',
     'actions',
-  ]; // Στήλες του πίνακα
-  customers: any[] = []; // Πηγή δεδομένων
+  ];
+  customers: any[] = [];
 
   constructor(private customerService: CustomerService) {}
 
