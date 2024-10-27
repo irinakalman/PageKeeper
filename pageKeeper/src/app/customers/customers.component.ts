@@ -64,10 +64,28 @@ export class CustomersComponent implements OnInit {
   }
 
   editCustomer(customer: any) {
-    console.log('Editing customer:', customer);
+    const dialogRef = this.dialog.open(CustomerFormComponent, {
+      width: '400px',
+      data: { customer }, // we pass the selected customer as data to the modal
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadCustomers(); //We update the customer list after processing
+      }
+    });
   }
 
   deleteCustomer(customer: any) {
-    console.log('Deleting customer:', customer);
+    //console.log('Deleting customer:', customer);
+    if (
+      confirm(
+        `Are you sure you want to delete ${customer.name} ${customer.surname}?`
+      )
+    ) {
+      this.customerService.deleteCustomer(customer._id).subscribe(() => {
+        this.loadCustomers(); //we update the list of customers after deletion
+      });
+    }
   }
 }
