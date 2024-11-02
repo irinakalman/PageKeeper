@@ -1,5 +1,6 @@
 <section class="example-container mat-elevation-z8" tabindex="0">
   <h1>Reservations</h1>
+  <button routerLink="/new-reservation" mat-raised-button color="primary">Add New Reservation</button>
   <table mat-table [dataSource]="dataSource">
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
@@ -37,9 +38,13 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="viewReservation(element)">View</button>
-        <button mat-button (click)="editReservation(element)">Edit</button>
-        <button mat-button (click)="deleteReservation(element)">Delete</button>
+        <button
+        mat-button
+        color="primary"
+        (click)="completeReservation(element)"
+        [disabled]="element.status === 'completed'">
+        Complete
+      </button>
       </td>
     </ng-container>
 
@@ -47,3 +52,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </section>
+
+<!-- <app-reservation-form
+></app-reservation-form> -->

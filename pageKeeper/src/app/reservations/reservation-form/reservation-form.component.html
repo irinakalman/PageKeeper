@@ -1,0 +1,33 @@
+<a routerLink="/reservations"
+  ><img src="assets/images/back-button.png" alt=""
+/></a>
+<form [formGroup]="myForm" (ngSubmit)="addReservation()">
+  <mat-form-field appearance="outline" *ngIf="customers.length > 0">
+    <mat-label>Customer ID</mat-label>
+    <mat-select formControlName="customerId">
+      <mat-option *ngFor="let customer of customers" [value]="customer._id">
+        {{ customer._id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" *ngIf="books.length > 0">
+    <mat-label>Book ID</mat-label>
+    <mat-select formControlName="bookId">
+      <mat-option *ngFor="let book of books" [value]="book._id">
+        {{ book._id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Return By</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="returnBy" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">
+    Add Reservation
+  </button>
+</form>
