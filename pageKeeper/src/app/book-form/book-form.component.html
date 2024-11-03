@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Add New Book</h2>
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <!-- Book Name Field -->
+  <mat-form-field>
+    <mat-label>Book Name</mat-label>
+    <input matInput formControlName="name" required />
+    <mat-error *ngIf="bookForm.controls['name'].hasError('required')">
+      Book Name is required
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['name'].hasError('minlength')">
+      Minimum length is 3
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['name'].hasError('maxlength')">
+      Maximum length is 15
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Year Field -->
+  <mat-form-field>
+    <mat-label>Year</mat-label>
+    <input matInput formControlName="year" type="number" required />
+    <mat-error *ngIf="bookForm.controls['year'].hasError('required')">
+      Year is required
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['year'].hasError('min')">
+      Year must be at least 1900
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['year'].hasError('max')">
+      Year cannot be greater than 2024
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Type Field -->
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type" required>
+      <mat-option value="Fiction">Fiction</mat-option>
+      <mat-option value="Non-Fiction">Non-Fiction</mat-option>
+      <mat-option value="Sci-Fi">Sci-Fi</mat-option>
+      <mat-option value="Biography">Biography</mat-option>
+    </mat-select>
+    <mat-error *ngIf="bookForm.controls['type'].hasError('required')">
+      Type is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Author Field -->
+  <mat-form-field>
+    <mat-label>Author</mat-label>
+    <input matInput formControlName="author" required />
+    <mat-error *ngIf="bookForm.controls['author'].hasError('required')">
+      Author is required
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['author'].hasError('minlength')">
+      Minimum length is 3
+    </mat-error>
+    <mat-error *ngIf="bookForm.controls['author'].hasError('maxlength')">
+      Maximum length is 15
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Submit Button -->
+  <button mat-button type="submit" [disabled]="!bookForm.valid">Save</button>
+</form>
