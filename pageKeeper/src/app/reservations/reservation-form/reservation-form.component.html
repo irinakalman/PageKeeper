@@ -6,7 +6,7 @@
     <mat-label>Customer ID</mat-label>
     <mat-select formControlName="customerId">
       <mat-option *ngFor="let customer of customers" [value]="customer._id">
-        {{ customer._id }}
+        {{ customer.name + ' ' + customer.surname }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -15,7 +15,7 @@
     <mat-label>Book ID</mat-label>
     <mat-select formControlName="bookId">
       <mat-option *ngFor="let book of books" [value]="book._id">
-        {{ book._id }}
+        {{ book.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
