@@ -1,5 +1,7 @@
 <section class="example-container mat-elevation-z8" tabindex="0">
-  <button mat-raised-button color="primary" (click)="addCustomer()">Add New Customer</button>
+  <button mat-raised-button class="primary-button" (click)="addCustomer()">
+    Add New Customer
+  </button>
   <table mat-table [dataSource]="customers">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -29,14 +31,33 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let customer">
-        <!-- Dummy buttons -->
-        <button mat-button (click)="viewCustomer(customer)">View</button>
-        <button mat-button (click)="editCustomer(customer)">Edit</button>
-        <button mat-button (click)="deleteCustomer(customer)">Delete</button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="primary-button"
+          (click)="viewCustomer(customer)"
+        >
+          View
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="secondary-button"
+          (click)="editCustomer(customer)"
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          class="warn-button"
+          (click)="deleteCustomer(customer)"
+        >
+          Delete
+        </button>
       </td>
     </ng-container>
 
-    <!-- Header and Row Declarations -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
