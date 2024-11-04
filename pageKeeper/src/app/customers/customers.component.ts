@@ -5,11 +5,19 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, MatTableModule, MatButtonModule],
+  imports: [
+    HeaderComponent,
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    CustomerFormComponent,
+    RouterLink,
+  ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
 })
