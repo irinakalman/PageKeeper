@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>Add New Customer</h2>
+<a routerLink="/customers"
+  ><img src="assets/images/back-button.png" alt=""
+/></a>
+<h2>Add New Customer</h2>
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
     <mat-label>Name</mat-label>
@@ -45,7 +48,12 @@
     >
   </mat-form-field>
 
-  <button mat-button type="submit" [disabled]="!customerForm.valid">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!customerForm.valid"
+  >
     Save
   </button>
 </form>
