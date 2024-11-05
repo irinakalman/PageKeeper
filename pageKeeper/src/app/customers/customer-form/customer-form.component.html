@@ -1,5 +1,6 @@
 <!-- <a routerLink="/customers" -->
- <a (click)="goBack()"> <!--couldnt find out why routerlink wasnt working-->
+<a (click)="goBack()">
+  <!--couldnt find out why routerlink wasnt working-->
   <img src="assets/images/back-button.png" alt="back-button"
 /></a>
 <!-- <h2>Add New Customer</h2> -->
@@ -53,8 +54,10 @@
     mat-raised-button
     color="primary"
     type="submit"
+    *ngIf="!viewOnlyMode"
+    [disabled]="!customerForm.valid"
   >
-  <!--To make the button be blue only when the form is completed add "[disabled]="!customerForm.valid" inside the button.
+    <!--To make the button be blue only when the form is completed add "[disabled]="!customerForm.valid" inside the button.
   I got rid of it so it can be alike the reservation form-->
     Save
   </button>

@@ -33,22 +33,46 @@ export class CustomerFormComponent implements OnInit {
     private router: Router
   ) {}
 
+  viewOnlyMode: boolean = false; //for view button
+
   ngOnInit(): void {
     this.customerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
-      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ],
+      ],
+      surname: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ],
+      ],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.minLength(8)]],
     });
 
     const customerId = this.route.snapshot.paramMap.get('id');
-    this.isEditMode = !!customerId;
+    const isViewMode =
+      this.route.snapshot.routeConfig?.path?.includes('view') || false; // Default to false if undefined
+    this.isEditMode = !isViewMode && !!customerId;
+    this.viewOnlyMode = isViewMode;
 
-    if (this.isEditMode && customerId) {
-      // Edit mode - Load existing customer data
-      this.customerService.getCustomerById(customerId).subscribe((customer: Customer) => {
-        this.customerForm.patchValue(customer);
-      });
+    if (customerId) {
+      //Load existing customer data if we are in edit or view mode
+      this.customerService
+        .getCustomerById(customerId)
+        .subscribe((customer: Customer) => {
+          this.customerForm.patchValue(customer);
+          if (this.viewOnlyMode) {
+            this.customerForm.disable(); //disable all fields for view mode
+          }
+        });
     }
   }
 
@@ -58,11 +82,13 @@ export class CustomerFormComponent implements OnInit {
 
       if (this.isEditMode) {
         // Update customer
-        this.customerService.updateCustomer(this.route.snapshot.paramMap.get('id')!, customerData)
+        this.customerService
+          .updateCustomer(this.route.snapshot.paramMap.get('id')!, customerData)
           .subscribe(() => this.router.navigate(['/customers']));
       } else {
         // Add new customer
-        this.customerService.addCustomer(customerData)
+        this.customerService
+          .addCustomer(customerData)
           .subscribe(() => this.router.navigate(['/customers']));
       }
     }
