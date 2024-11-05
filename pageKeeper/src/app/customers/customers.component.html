@@ -1,3 +1,16 @@
+<!--for client-side search for customers-->
+<section class="search">
+  <mat-form-field appearance="outline">
+    <mat-label>Search Customers</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchTerm"
+      (input)="filterCustomers()"
+      placeholder="Search by name or email"
+    />
+  </mat-form-field>
+</section>
+
 <section class="example-container mat-elevation-z8" tabindex="0">
   <h1>Customers</h1>
   <button
@@ -9,7 +22,7 @@
     Add New Customer
   </button>
 
-  <table mat-table [dataSource]="customers">
+  <table mat-table [dataSource]="filteredCustomers">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>

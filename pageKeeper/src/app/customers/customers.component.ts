@@ -6,6 +6,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms'; // add this for ngModel
 
 @Component({
   selector: 'app-customers',
@@ -17,6 +20,9 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
     MatButtonModule,
     CustomerFormComponent,
     RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule, // add this for ngModel
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
@@ -30,6 +36,8 @@ export class CustomersComponent implements OnInit {
     'actions',
   ];
   customers: any[] = [];
+  filteredCustomers: any[] = []; //define filteredCustomers
+  searchTerm: string = ''; //define searchTerm
 
   constructor(
     private customerService: CustomerService,
@@ -43,7 +51,17 @@ export class CustomersComponent implements OnInit {
   loadCustomers() {
     this.customerService.getCustomers().subscribe((data: any) => {
       this.customers = data;
+      this.filterCustomers();
     });
+  }
+
+  filterCustomers() {
+    const lowerCaseTerm = this.searchTerm.toLowerCase();
+    this.filteredCustomers = this.customers.filter(
+      (customer) =>
+        customer.name.toLowerCase().includes(lowerCaseTerm) ||
+        customer.email.toLowerCase().includes(lowerCaseTerm)
+    );
   }
 
   addCustomer() {
