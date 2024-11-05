@@ -20,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
   ],
   templateUrl: './customer-form.component.html',
-  styleUrls: ['./customer-form.component.scss'], // Ensure style file is linked
+  styleUrls: ['./customer-form.component.scss'],
 })
 export class CustomerFormComponent implements OnInit {
   customerForm!: FormGroup;
@@ -66,5 +66,9 @@ export class CustomerFormComponent implements OnInit {
           .subscribe(() => this.router.navigate(['/customers']));
       }
     }
+  }
+  //method to navigate back to the Customers list (needing for back button on customer-form)
+  goBack(): void {
+    this.router.navigate(['/customers']);
   }
 }
