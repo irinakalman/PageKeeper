@@ -1,35 +1,29 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Customer } from '../customers';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { Customer } from '../customers';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './customer-form.component.html',
+  styleUrls: ['./customer-form.component.scss'], // Ensure style file is linked
 })
 export class CustomerFormComponent implements OnInit {
-  customerForm: FormGroup;
+  customerForm!: FormGroup;
   isEditMode = false;
 
   constructor(
@@ -37,53 +31,38 @@ export class CustomerFormComponent implements OnInit {
     private customerService: CustomerService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.customerForm = this.fb.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(15),
-        ],
-      ],
-      surname: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(15),
-        ],
-      ],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.minLength(8)]],
     });
-  }
 
-  ngOnInit(): void {
     const customerId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!customerId;
 
-    if (customerId) {
-      //check if customerId is null
-      this.customerService
-        .getCustomerById(customerId)
-        .subscribe((customer: any) => {
-          this.customerForm.patchValue(customer);
-        });
+    if (this.isEditMode && customerId) {
+      // Edit mode - Load existing customer data
+      this.customerService.getCustomerById(customerId).subscribe((customer: Customer) => {
+        this.customerForm.patchValue(customer);
+      });
     }
   }
 
   onSubmit() {
     if (this.customerForm.valid) {
       const customerData: Customer = this.customerForm.value;
+
       if (this.isEditMode) {
-        this.customerService
-          .updateCustomer(this.route.snapshot.paramMap.get('id')!, customerData)
+        // Update customer
+        this.customerService.updateCustomer(this.route.snapshot.paramMap.get('id')!, customerData)
           .subscribe(() => this.router.navigate(['/customers']));
       } else {
-        this.customerService
-          .addCustomer(customerData)
+        // Add new customer
+        this.customerService.addCustomer(customerData)
           .subscribe(() => this.router.navigate(['/customers']));
       }
     }
