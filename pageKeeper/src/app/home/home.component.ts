@@ -3,12 +3,13 @@ import { HeaderComponent } from '../header/header.component';
 import { BookService } from '../services/books.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, MatTableModule],
+  imports: [HeaderComponent, CommonModule, MatTableModule, MatButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
