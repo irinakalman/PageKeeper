@@ -1,2 +1,30 @@
-button {
+.search-sort-controls {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  gap: 24px;
+}
+
+.add-search-sort {
+  display: flex;
+  justify-content: space-between;
+}
+
+table button {
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  padding: 0 12px;
+  min-width: 40px;
+
+  img {
+    width: 25px;
+  }
+
+  &.edit,
+  &.delete {
+    img {
+      width: 20px;
+    }
+  }
 }
