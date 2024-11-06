@@ -1,3 +1,4 @@
+import { BookFormComponent } from './books/book-form/book-form.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
@@ -11,7 +12,8 @@ export const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'reservations', component: ReservationsComponent },
   { path: 'new-reservation', component: ReservationFormComponent},
-  { path: 'reservations/view/:id', component: ReservationFormComponent},
-  { path: 'reservations/edit/:id', component: ReservationFormComponent},
+  { path: 'new-book', component: BookFormComponent },
+  { path: 'books/edit/:id', component: BookFormComponent },
+  { path: 'books/view/:id', component: BookFormComponent },
 
 ];

@@ -1,5 +1,14 @@
-<h2 mat-dialog-title>Add New Book</h2>
-<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+
+
+<a class="back-btn" routerLink="/books"
+  ><img src="assets/images/back-button.png" alt=""
+/></a>
+
+<h1 *ngIf="!isViewMode && !isEditMode">Add new book</h1>
+<h1 *ngIf="isViewMode">View book</h1>
+<h1 *ngIf="!isViewMode && isEditMode">Edit book</h1>
+
+<form class="global-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
   <!-- Book Name Field -->
   <mat-form-field>
     <mat-label>Book Name</mat-label>
@@ -59,6 +68,14 @@
     </mat-error>
   </mat-form-field>
 
+   <!-- Created On Field (Read-only) -->
+   <mat-form-field *ngIf="isEditMode || isViewMode">
+    <mat-label>Created On</mat-label>
+    <input matInput formControlName="createdOn" readonly />
+  </mat-form-field>
+
   <!-- Submit Button -->
-  <button mat-button type="submit" [disabled]="!bookForm.valid">Save</button>
+  <button mat-button type="submit" mat-raised-button color="primary" [disabled]="!bookForm.valid" *ngIf="!isViewMode" >Save</button>
 </form>
+
+<div *ngIf="showSuccessMessage" >Book has been added successfully</div>

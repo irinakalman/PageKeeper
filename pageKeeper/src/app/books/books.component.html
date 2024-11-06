@@ -1,5 +1,15 @@
+
+<h1>Books</h1>
+  <button
+    routerLink="/new-book"
+    mat-raised-button
+    class="primary-button"
+    color="primary"
+  >
+    Add New Book
+  </button>
 <section class="example-container mat-elevation-z8" tabindex="0">
-  <h1>Books</h1>
+
   <table mat-table [dataSource]="dataSource">
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
@@ -39,7 +49,7 @@
           mat-raised-button
           color="primary"
           class="primary-button"
-          (click)="viewReservation(element)"
+          (click)="viewBook(element)"
         >
           View
         </button>
@@ -47,7 +57,7 @@
           mat-raised-button
           color="primary"
           class="secondary-button"
-          (click)="editReservation(element)"
+          (click)="editBook(element)"
         >
           Edit
         </button>
@@ -55,7 +65,7 @@
           mat-raised-button
           color="warn"
           class="warn-button"
-          (click)="deleteReservation(element)"
+          (click)="deleteBook(element.bookId)"
         >
           Delete
         </button>

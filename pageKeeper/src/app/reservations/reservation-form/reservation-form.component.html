@@ -1,9 +1,10 @@
-<a routerLink="/reservations"
+<a class="back-btn" routerLink="/reservations"
   ><img src="assets/images/back-button.png" alt=""
 /></a>
-<form [formGroup]="myForm" (ngSubmit)="addReservation()">
+<h1>Add new reservation</h1>
+<form class="global-form" [formGroup]="myForm" (ngSubmit)="addReservation()">
   <mat-form-field appearance="outline" *ngIf="customers.length > 0">
-    <mat-label>Customer ID</mat-label>
+    <mat-label>Customer</mat-label>
     <mat-select formControlName="customerId">
       <mat-option *ngFor="let customer of customers" [value]="customer._id">
         {{ customer.name + ' ' + customer.surname }}
@@ -12,7 +13,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline" *ngIf="books.length > 0">
-    <mat-label>Book ID</mat-label>
+    <mat-label>Book</mat-label>
     <mat-select formControlName="bookId">
       <mat-option *ngFor="let book of books" [value]="book._id">
         {{ book.name}}

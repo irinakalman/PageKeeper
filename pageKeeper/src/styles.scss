@@ -8,10 +8,12 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #413c3c;
 }
 
 section.mat-elevation-z8 {
   margin: 25px 25px 100px;
+  margin: 0 0 100px;
 }
 
 .mat-drawer-container {
@@ -19,6 +21,7 @@ section.mat-elevation-z8 {
 
   mat-sidenav {
     background-color: #4a90e2;
+    background-color: #27476e;
     border-radius: 0;
     width: 320px;
   }
@@ -26,6 +29,7 @@ section.mat-elevation-z8 {
   mat-sidenav-content {
     margin-left: 320px;
     background-color: #f5f5f5;
+    background-color: #f1f3f4;
     padding: 50px;
   }
 
@@ -48,7 +52,8 @@ section.mat-elevation-z8 {
 
 h1 {
   text-align: center;
-  font-size: 30px !important;
+  font-size: 34px !important;
+  color: #413c3c;
 }
 
 .menu-icon {
@@ -58,10 +63,68 @@ h1 {
 
 button.mat-primary:not(:disabled) {
   background-color: #4a90e2;
+  background-color: #6a7dab;
   color: white;
   margin-bottom: 2rem;
 }
 
 table button.mat-primary:not(:disabled) {
   margin-bottom: 0;
+}
+
+.back-btn {
+  img {
+    width: 45px;
+  }
+}
+
+
+
+.global-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mat-mdc-form-field {
+    min-width: 350px;
+  }
+
+  button[mat-raised-button] {
+    margin-top: 2rem;
+    min-width: 150px;
+  }
+}
+
+.mat-mdc-table .mat-mdc-header-cell {
+  top: -52px !important;
+}
+
+.mat-mdc-table{
+  border: 0.5px solid #d6d6d6!important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+
+.mat-mdc-cell, .mat-mdc-header-cell {
+  border-bottom-color: #d6d6d6!important;
+  border-bottom-width: var(--mat-table-row-item-outline-width, 0.5px);
+}
+
+.mat-mdc-header-row {
+  background-color: #27476e !important;
+  color: white !important;
+}
+
+
+.ng-star-inserted {
+  text-align: center;
+}
+
+.mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input, .mat-mdc-select-disabled {
+  color: var(--mdc-filled-text-field-input-text-color, var(--mat-app-on-surface))!important;
 }

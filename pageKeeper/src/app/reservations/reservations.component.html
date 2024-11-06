@@ -1,13 +1,15 @@
+<h1>Reservations</h1>
+<button
+  routerLink="/new-reservation"
+  mat-raised-button
+  class="primary-button"
+  color="primary"
+>
+  Add New Reservation
+</button>
+
 <section class="example-container mat-elevation-z8" tabindex="0">
-  <h1>Reservations</h1>
-  <button
-    routerLink="/new-reservation"
-    mat-raised-button
-    class="primary-button"
-    color="primary"
-  >
-    Add New Reservation
-  </button>
+
   <table mat-table [dataSource]="dataSource">
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
