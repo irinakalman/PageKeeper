@@ -9,6 +9,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms'; // add this for ngModel
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-customers',
@@ -23,6 +25,8 @@ import { FormsModule } from '@angular/forms'; // add this for ngModel
     MatFormFieldModule,
     MatInputModule,
     FormsModule, // add this for ngModel
+    MatSelectModule, //needed for sorting
+    MatOptionModule, //needed for sorting
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
@@ -38,6 +42,7 @@ export class CustomersComponent implements OnInit {
   customers: any[] = [];
   filteredCustomers: any[] = []; //define filteredCustomers
   searchTerm: string = ''; //define searchTerm
+  sortOrder: string = 'asc'; //sort order
 
   constructor(
     private customerService: CustomerService,
@@ -62,6 +67,11 @@ export class CustomersComponent implements OnInit {
         customer.name.toLowerCase().includes(lowerCaseTerm) ||
         customer.email.toLowerCase().includes(lowerCaseTerm)
     );
+    //sorting
+    this.filteredCustomers.sort((a, b) => {
+      const comparison = a.name.localeCompare(b.name); // Compare names alphabetically
+      return this.sortOrder === 'asc' ? comparison : -comparison; // Ascending or descending
+    });
   }
 
   addCustomer() {

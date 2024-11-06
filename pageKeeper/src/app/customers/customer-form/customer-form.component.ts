@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class CustomerFormComponent implements OnInit {
   customerForm!: FormGroup;
   isEditMode = false;
+  isViewMode = false;
 
   constructor(
     private fb: FormBuilder,

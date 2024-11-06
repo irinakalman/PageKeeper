@@ -1,3 +1,5 @@
+<h1>Customers</h1>
+
 <!--for client-side search for customers-->
 <section class="search">
   <mat-form-field appearance="outline">
@@ -9,10 +11,18 @@
       placeholder="Search by name or email"
     />
   </mat-form-field>
+
+  <!-- //For asc/desc sorting -->
+  <mat-form-field appearance="outline">
+    <mat-label>Sort Order</mat-label>
+    <mat-select [(ngModel)]="sortOrder" (selectionChange)="filterCustomers()">
+      <mat-option value="asc">A-Z</mat-option>
+      <mat-option value="desc">Z-A</mat-option>
+    </mat-select>
+  </mat-form-field>
 </section>
 
 <section class="example-container mat-elevation-z8" tabindex="0">
-  <h1>Customers</h1>
   <button
     routerLink="/new-customer"
     mat-raised-button
