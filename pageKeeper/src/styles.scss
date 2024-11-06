@@ -116,8 +116,20 @@ table button.mat-primary:not(:disabled) {
 }
 
 .mat-mdc-header-row {
-  background-color: #27476e !important;
+  // background-color: #27476e !important;
   color: white !important;
+}
+
+.mat-mdc-header-cell {
+  background-color: #27476e !important;
+
+  &:first-of-type {
+    border-radius: 8px 0 0 0;
+  }
+
+  &:last-of-type {
+    border-radius: 0 8px 0 0;
+  }
 }
 
 

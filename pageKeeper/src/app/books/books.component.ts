@@ -4,7 +4,10 @@ import { BookService } from '../services/books.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { Router, RouterLink } from '@angular/router';
+import {  Router, RouterLink } from '@angular/router';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-books',
@@ -14,7 +17,7 @@ import { Router, RouterLink } from '@angular/router';
     MatTableModule,
     MatButtonModule,
     MatButtonModule,
-    RouterLink,
+    RouterLink, MatFormField, MatLabel, MatInput, MatSelectModule, MatFormFieldModule
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
@@ -33,6 +36,8 @@ export class BooksComponent implements OnInit {
   isViewMode = false;
   isEditMode = false;
   showForm = false;
+  searchTerm: string = '';
+  sortOrder: string = 'asc';
 
   constructor(private bookService: BookService, private router: Router) {}
 
@@ -41,7 +46,7 @@ export class BooksComponent implements OnInit {
   }
 
   loadBooks(): void {
-    this.bookService.getBooks().subscribe((books: any[]) => {
+    this.bookService.getBooks(this.searchTerm, this.sortOrder).subscribe((books: any[]) => {
       console.log(books);
       this.dataSource = books.map((book) => ({
         bookName: book.name,
@@ -53,6 +58,17 @@ export class BooksComponent implements OnInit {
       }));
       //console.log(books);
     });
+  }
+
+  onSearchChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTerm = inputElement.value;
+    this.loadBooks();
+}
+
+  onSortChange(sort: string): void {
+    this.sortOrder = sort;
+    this.loadBooks();
   }
 
   // addBook(): void {

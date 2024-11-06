@@ -1,6 +1,9 @@
 
 <h1>Books</h1>
-  <button
+
+
+  <section class="add-search-sort">
+    <button
     routerLink="/new-book"
     mat-raised-button
     class="primary-button"
@@ -8,37 +11,54 @@
   >
     Add New Book
   </button>
+  <div class="search-sort-controls">
+    <mat-form-field>
+      <mat-label>Search by Book Name</mat-label>
+      <input matInput (input)="onSearchChange($event)" placeholder="Search books" />
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sort</mat-label>
+      <mat-select (selectionChange)="onSortChange($event.value)">
+        <mat-option value="asc">Ascending</mat-option>
+        <mat-option value="desc">Descending</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  </section>
 <section class="example-container mat-elevation-z8" tabindex="0">
 
   <table mat-table [dataSource]="dataSource">
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
       <th mat-header-cell *matHeaderCellDef>Book Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookName }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.bookName }}</td>
     </ng-container>
 
     <!-- Customer Name Column -->
     <ng-container matColumnDef="bookYear">
       <th mat-header-cell *matHeaderCellDef>Year</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookYear }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.bookYear }}</td>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef="bookType">
       <th mat-header-cell *matHeaderCellDef>Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookType }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.bookType }}</td>
     </ng-container>
 
     <!-- Reserved On Column -->
     <ng-container matColumnDef="bookAuthor">
       <th mat-header-cell *matHeaderCellDef>Author</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookAuthor }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.bookAuthor }}</td>
     </ng-container>
 
     <!-- Return By Column -->
     <ng-container matColumnDef="createdOn">
       <th mat-header-cell *matHeaderCellDef>Created On</th>
-      <td mat-cell *matCellDef="let element">{{ element.createdOn | date }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.createdOn | date }}</td>
     </ng-container>
 
     <!-- Actions Column -->
@@ -51,23 +71,23 @@
           class="primary-button"
           (click)="viewBook(element)"
         >
-          View
+         <img src="assets/images/view.png" alt="View icon">
         </button>
         <button
           mat-raised-button
           color="primary"
-          class="secondary-button"
+          class="secondary-button edit"
           (click)="editBook(element)"
         >
-          Edit
+        <img src="assets/images/editing.png" alt="Edit icon">
         </button>
         <button
           mat-raised-button
           color="warn"
-          class="warn-button"
+          class="warn-button delete"
           (click)="deleteBook(element.bookId)"
         >
-          Delete
+        <img src="assets/images/delete.png" alt="Delete icon">
         </button>
       </td>
     </ng-container>
