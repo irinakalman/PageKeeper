@@ -46,6 +46,7 @@ export class ReservationFormComponent implements OnInit {
   customers: any[] = [];
   isEditMode = false;
   viewOnlyMode = false;
+  selectedBookId: string | null = null; //home buttons
 
   constructor(
     private bookService: BookService,
@@ -70,8 +71,13 @@ export class ReservationFormComponent implements OnInit {
         Validators.required
       ),
     });
-
-
+    //  This is need for the reserve me now button on home
+    //read the book ID from route parameters
+    this.selectedBookId = this.route.snapshot.paramMap.get('bookId');
+    if (this.selectedBookId) {
+      //set default value for bookId in the form
+      this.myForm.patchValue({ bookId: this.selectedBookId });
+    }
 
     this.bookService.getBooks().subscribe((books: any[]) => {
       this.books = books.filter((book) => book.available);
@@ -119,6 +125,4 @@ export class ReservationFormComponent implements OnInit {
       },
     });
   }
-
-
 }
