@@ -19,4 +19,5 @@ export const routes: Routes = [
   { path: 'new-book', component: BookFormComponent },
   { path: 'books/edit/:id', component: BookFormComponent },
   { path: 'books/view/:id', component: BookFormComponent },
+  { path: 'new-reservation/:bookId', component: ReservationFormComponent },
 ];

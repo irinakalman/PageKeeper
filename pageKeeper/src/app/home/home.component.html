@@ -31,6 +31,16 @@
       <td mat-cell *matCellDef="let book">{{ book.createdOn | date }}</td>
     </ng-container>
 
+    <!--actions for Reserve It Now Button -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let book">
+        <button mat-raised-button (click)="reserveBook(book._id)">
+          Reserve It Now
+        </button>
+      </td>
+    </ng-container>
+
     <!-- Table Header and Rows -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

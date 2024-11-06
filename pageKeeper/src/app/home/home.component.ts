@@ -3,6 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { BookService } from '../services/books.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,16 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class HomeComponent implements OnInit {
   availableBooks: any[] = [];
-  displayedColumns: string[] = ['name', 'year', 'type', 'author', 'createdOn']; // Στήλες που θα εμφανίζονται
+  displayedColumns: string[] = [
+    'name',
+    'year',
+    'type',
+    'author',
+    'createdOn',
+    'actions',
+  ]; // Στήλες που θα εμφανίζονται (actions is for the reserve it now button)
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
     this.bookService.getBooks().subscribe((books: any) => {
@@ -24,5 +32,8 @@ export class HomeComponent implements OnInit {
         (book: any) => book.available === true
       );
     });
+  }
+  reserveBook(bookId: string): void {
+    this.router.navigate(['/new-reservation', bookId]);
   }
 }
