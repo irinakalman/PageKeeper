@@ -1,6 +1,11 @@
-<h2 mat-dialog-title>Add New Customer</h2>
+<!-- <a routerLink="/customers" -->
+<a (click)="goBack()">
+  <!--couldnt find out why routerlink wasnt working-->
+  <img src="assets/images/back-button.png" alt="back-button"
+/></a>
+<!-- <h2>Add New Customer</h2> -->
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" required />
     <mat-error *ngIf="customerForm.controls['name'].hasError('required')"
@@ -14,7 +19,7 @@
     >
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Surname</mat-label>
     <input matInput formControlName="surname" required />
     <mat-error *ngIf="customerForm.controls['surname'].hasError('required')"
@@ -28,7 +33,7 @@
     >
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" required type="email" />
     <mat-error *ngIf="customerForm.controls['email'].hasError('email')"
@@ -36,7 +41,7 @@
     >
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Phone Number</mat-label>
     <input matInput formControlName="phoneNumber" required />
     <mat-error
@@ -45,7 +50,15 @@
     >
   </mat-form-field>
 
-  <button mat-button type="submit" [disabled]="!customerForm.valid">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    *ngIf="!viewOnlyMode"
+    [disabled]="!customerForm.valid"
+  >
+    <!--To make the button be blue only when the form is completed add "[disabled]="!customerForm.valid" inside the button.
+  I got rid of it so it can be alike the reservation form-->
     Save
   </button>
 </form>

@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { CustomerService } from '../services/customer.service';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'; //for forms
-import { CustomerFormComponent } from '../customer-form/customer-form.component';
+import { Router, RouterLink } from '@angular/router';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms'; // add this for ngModel
 
 @Component({
   selector: 'app-customers',
@@ -16,7 +18,11 @@ import { CustomerFormComponent } from '../customer-form/customer-form.component'
     CommonModule,
     MatTableModule,
     MatButtonModule,
-    MatDialogModule,
+    CustomerFormComponent,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule, // add this for ngModel
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
@@ -30,10 +36,12 @@ export class CustomersComponent implements OnInit {
     'actions',
   ];
   customers: any[] = [];
+  filteredCustomers: any[] = []; //define filteredCustomers
+  searchTerm: string = ''; //define searchTerm
 
   constructor(
     private customerService: CustomerService,
-    public dialog: MatDialog
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,48 +51,39 @@ export class CustomersComponent implements OnInit {
   loadCustomers() {
     this.customerService.getCustomers().subscribe((data: any) => {
       this.customers = data;
+      this.filterCustomers();
     });
+  }
+
+  filterCustomers() {
+    const lowerCaseTerm = this.searchTerm.toLowerCase();
+    this.filteredCustomers = this.customers.filter(
+      (customer) =>
+        customer.name.toLowerCase().includes(lowerCaseTerm) ||
+        customer.email.toLowerCase().includes(lowerCaseTerm)
+    );
   }
 
   addCustomer() {
-    const dialogRef = this.dialog.open(CustomerFormComponent, {
-      width: '400px',
-      data: { customer: null },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadCustomers();
-      }
-    });
+    this.router.navigate(['/new-customer']);
   }
 
   viewCustomer(customer: any) {
-    console.log('Viewing customer:', customer);
+    this.router.navigate(['/customers/view', customer._id]);
   }
 
   editCustomer(customer: any) {
-    const dialogRef = this.dialog.open(CustomerFormComponent, {
-      width: '400px',
-      data: { customer }, // we pass the selected customer as data to the modal
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadCustomers(); //We update the customer list after processing
-      }
-    });
+    this.router.navigate(['/customers/edit', customer._id]);
   }
 
   deleteCustomer(customer: any) {
-    //console.log('Deleting customer:', customer);
     if (
       confirm(
         `Are you sure you want to delete ${customer.name} ${customer.surname}?`
       )
     ) {
       this.customerService.deleteCustomer(customer._id).subscribe(() => {
-        this.loadCustomers(); //we update the list of customers after deletion
+        this.loadCustomers();
       });
     }
   }

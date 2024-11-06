@@ -5,6 +5,7 @@ import { BooksComponent } from './books/books.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { ReservationFormComponent } from './reservations/reservation-form/reservation-form.component';
+import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
