@@ -1,2 +1,3 @@
-button {
+button.mat-primary:not(:disabled) {
+  min-width: 125px;
 }
