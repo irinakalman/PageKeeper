@@ -11,10 +11,12 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'books', component: BooksComponent },
   { path: 'customers', component: CustomersComponent },
+  { path: 'customers/view/:id', component: CustomerFormComponent },
+  { path: 'customers/edit/:id', component: CustomerFormComponent },
+  { path: 'new-customer', component: CustomerFormComponent },
   { path: 'reservations', component: ReservationsComponent },
-  { path: 'new-reservation', component: ReservationFormComponent},
+  { path: 'new-reservation', component: ReservationFormComponent },
   { path: 'new-book', component: BookFormComponent },
   { path: 'books/edit/:id', component: BookFormComponent },
   { path: 'books/view/:id', component: BookFormComponent },
-
 ];
