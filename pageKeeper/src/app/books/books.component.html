@@ -12,18 +12,17 @@
     Add New Book
   </button>
   <div class="search-sort-controls">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Search by Book Name</mat-label>
-      <mat-icon matPrefix>search</mat-icon>
       <input matInput (input)="onSearchChange($event)" />
 
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Sort</mat-label>
-      <mat-select (selectionChange)="onSortChange($event.value)">
-        <mat-option value="asc">Ascending</mat-option>
-        <mat-option value="desc">Descending</mat-option>
+      <mat-select [(value)]="sortOrder" (selectionChange)="onSortChange($event.value)">
+        <mat-option value="asc">A-Z</mat-option>
+        <mat-option value="desc">Z-A</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

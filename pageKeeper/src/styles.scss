@@ -137,27 +137,19 @@ table button.mat-primary:not(:disabled) {
 }
 
 
-.ng-star-inserted {
-  text-align: center;
-}
+// .ng-star-inserted {
+//   text-align: center;
+// }
 
 .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input, .mat-mdc-select-disabled {
   color: var(--mdc-filled-text-field-input-text-color, var(--mat-app-on-surface))!important;
-}
-
-
-.mat-mdc-form-field-icon-prefix{
-  order: 2 !important;
-}
-
-.mat-mdc-form-field-infix {
-  order: 1;
 }
 
 .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
   padding-left: 16px !important;
 }
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: #f1f3f4;
+.mdc-text-field--filled:not(.mdc-text-field--disabled), .mat-mdc-form-field  {
+  background-color: #f1f3f4!important;
 }
+

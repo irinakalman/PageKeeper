@@ -10,7 +10,7 @@
 
 <form class="global-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
   <!-- Book Name Field -->
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Book Name</mat-label>
     <input matInput formControlName="name" required />
     <mat-error *ngIf="bookForm.controls['name'].hasError('required')">
@@ -25,7 +25,7 @@
   </mat-form-field>
 
   <!-- Year Field -->
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Year</mat-label>
     <input matInput formControlName="year" type="number" required />
     <mat-error *ngIf="bookForm.controls['year'].hasError('required')">
@@ -40,7 +40,7 @@
   </mat-form-field>
 
   <!-- Type Field -->
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Type</mat-label>
     <mat-select formControlName="type" required>
       <mat-option value="Fiction">Fiction</mat-option>
@@ -54,7 +54,7 @@
   </mat-form-field>
 
   <!-- Author Field -->
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Author</mat-label>
     <input matInput formControlName="author" required />
     <mat-error *ngIf="bookForm.controls['author'].hasError('required')">

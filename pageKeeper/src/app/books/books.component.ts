@@ -8,7 +8,6 @@ import {  Router, RouterLink } from '@angular/router';
 import { MatFormField, MatFormFieldModule, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-books',
@@ -18,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatButtonModule,
     MatButtonModule,
-    RouterLink, MatFormField, MatLabel, MatInput, MatSelectModule, MatFormFieldModule, MatIconModule
+    RouterLink, MatFormField, MatLabel, MatInput, MatSelectModule, MatFormFieldModule
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
