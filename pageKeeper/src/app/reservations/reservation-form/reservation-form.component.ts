@@ -17,7 +17,7 @@ import {
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { Reservation } from '../reservation';
+import { Reservation } from '../../types/reservation';
 import { ReservationsService } from '../../services/reservations.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 

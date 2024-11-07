@@ -1,8 +1,7 @@
-import { observable } from './../../../node_modules/rxjs/src/internal/symbol/observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Reservation } from '../reservations/reservation';
+import { Reservation } from '../types/reservation';
 
 
 
@@ -14,17 +13,17 @@ export class ReservationsService {
 
   constructor(private http: HttpClient) { }
 
-  getReservations(): Observable<any> {
-    return this.http.get(this.endpoint)
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.endpoint)
   }
 
-  addReservation(reservation: Reservation): Observable<any> {
+  addReservation(reservation: Reservation): Observable<Reservation> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'})
-    return this.http.post(this.endpoint, reservation, {headers })
+    return this.http.post<Reservation>(this.endpoint, reservation, {headers })
   }
 
-  completeReservation(id: string): Observable<any>{
+  completeReservation(id: string): Observable<Reservation>{
     const url = `${this.endpoint}/${id}/complete`;
-    return this.http.post(url, {})
+    return this.http.post<Reservation>(url, {})
   }
 }

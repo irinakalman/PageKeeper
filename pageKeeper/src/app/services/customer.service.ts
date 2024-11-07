@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from '../customers/customers';
+import { Customer } from '../types/customers';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class CustomerService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   //finding customer through ID
-  getCustomerById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getCustomerById(id: string): Observable<Customer> {
+    return this.http.get<Customer>(`${this.apiUrl}/${id}`);
   }
 }
