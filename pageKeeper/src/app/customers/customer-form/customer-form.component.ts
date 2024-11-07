@@ -70,9 +70,9 @@ export class CustomerFormComponent implements OnInit {
         .getCustomerById(customerId)
         .subscribe((customer: Customer) => {
           this.customerForm.patchValue(customer);
-          if (this.viewOnlyMode) {
-            this.customerForm.disable(); //disable all fields for view mode
-          }
+          // if (this.viewOnlyMode) {
+          //   this.customerForm.disable(); //disable all fields for view mode
+          // }
         });
     }
   }

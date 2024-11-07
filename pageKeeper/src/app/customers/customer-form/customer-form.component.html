@@ -7,7 +7,7 @@
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input matInput formControlName="name" required />
+    <input matInput formControlName="name" [readonly]="viewOnlyMode" required />
     <mat-error *ngIf="customerForm.controls['name'].hasError('required')"
       >Name is required</mat-error
     >
@@ -21,7 +21,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Surname</mat-label>
-    <input matInput formControlName="surname" required />
+    <input matInput formControlName="surname" [readonly]="viewOnlyMode" required />
     <mat-error *ngIf="customerForm.controls['surname'].hasError('required')"
       >Surname is required</mat-error
     >
@@ -35,7 +35,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
-    <input matInput formControlName="email" required type="email" />
+    <input matInput formControlName="email" [readonly]="viewOnlyMode" required type="email" />
     <mat-error *ngIf="customerForm.controls['email'].hasError('email')"
       >Enter a valid email</mat-error
     >
@@ -43,7 +43,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Phone Number</mat-label>
-    <input matInput formControlName="phoneNumber" required />
+    <input matInput formControlName="phoneNumber" [readonly]="viewOnlyMode" required />
     <mat-error
       *ngIf="customerForm.controls['phoneNumber'].hasError('minlength')"
       >Minimum length is 8</mat-error
