@@ -153,3 +153,7 @@ table button.mat-primary:not(:disabled) {
   background-color: #f1f3f4!important;
 }
 
+.mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input {
+  color: #413c3c!important;
+}
+

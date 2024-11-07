@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Customer } from '../customers';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.scss'],
@@ -59,10 +60,11 @@ export class CustomerFormComponent implements OnInit {
     });
 
     const customerId = this.route.snapshot.paramMap.get('id');
-    const isViewMode =
-      this.route.snapshot.routeConfig?.path?.includes('view') || false; // Default to false if undefined
-    this.isEditMode = !isViewMode && !!customerId;
-    this.viewOnlyMode = isViewMode;
+    this.isViewMode = this.route.snapshot.url.some(segment => segment.path === 'view');
+    this.isEditMode = !this.isViewMode && !!customerId;
+    this.viewOnlyMode = this.isViewMode;
+    console.log('isViewMode:', this.isViewMode);
+    console.log('isEditMode:', this.isEditMode);
 
     if (customerId) {
       //Load existing customer data if we are in edit or view mode
@@ -70,9 +72,9 @@ export class CustomerFormComponent implements OnInit {
         .getCustomerById(customerId)
         .subscribe((customer: Customer) => {
           this.customerForm.patchValue(customer);
-          // if (this.viewOnlyMode) {
-          //   this.customerForm.disable(); //disable all fields for view mode
-          // }
+          if (this.viewOnlyMode) {
+            this.customerForm.disable(); //disable all fields for view mode
+          }
         });
     }
   }
