@@ -27,6 +27,7 @@ export class CustomerFormComponent implements OnInit {
   customerForm!: FormGroup;
   isEditMode = false;
   isViewMode = false;
+  showSuccessMessage = false;
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +80,8 @@ export class CustomerFormComponent implements OnInit {
     }
   }
 
+
+
   onSubmit() {
     if (this.customerForm.valid) {
       const customerData: Customer = this.customerForm.value;
@@ -92,12 +95,24 @@ export class CustomerFormComponent implements OnInit {
         // Add new customer
         this.customerService
           .addCustomer(customerData)
-          .subscribe(() => this.router.navigate(['/customers']));
+          .subscribe({
+            next: () => {
+              console.log('Customer added successfully with test data');
+              this.showSuccessMessage = true;
+              this.customerForm.reset();
+              Object.keys(this.customerForm.controls).forEach(key => {
+                this.customerForm.get(key)?.setErrors(null);
+                this.customerForm.get(key)?.markAsPristine();
+                this.customerForm.get(key)?.markAsUntouched();
+              });
+
+              setTimeout(() => {
+                this.showSuccessMessage = false;
+              }, 10000)
+            },
+            error: (error) => console.error('Error with test payload:', error)
+          });
       }
     }
-  }
-  //method to navigate back to the Customers list (needing for back button on customer-form)
-  goBack(): void {
-    this.router.navigate(['/customers']);
   }
 }

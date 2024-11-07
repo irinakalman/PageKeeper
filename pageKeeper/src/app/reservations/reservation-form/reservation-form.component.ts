@@ -47,6 +47,7 @@ export class ReservationFormComponent implements OnInit {
   isEditMode = false;
   viewOnlyMode = false;
   selectedBookId: string | null = null; //home buttons
+  showSuccessMessage = false;
 
   constructor(
     private bookService: BookService,
@@ -103,8 +104,18 @@ export class ReservationFormComponent implements OnInit {
       this.reservationService.addReservation(reservationData).subscribe({
         next: (response) => {
           console.log('reservation added successfully', response);
-
+          this.showSuccessMessage = true;
           this.myForm.reset();
+
+          Object.keys(this.myForm.controls).forEach(key => {
+            this.myForm.get(key)?.setErrors(null);
+            this.myForm.get(key)?.markAsPristine();
+            this.myForm.get(key)?.markAsUntouched();
+          });
+
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 10000)
         },
 
         error: (error) => {
