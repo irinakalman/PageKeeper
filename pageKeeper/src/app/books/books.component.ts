@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import {  Router, RouterLink } from '@angular/router';
-import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldModule, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-books',
@@ -17,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatTableModule,
     MatButtonModule,
     MatButtonModule,
-    RouterLink, MatFormField, MatLabel, MatInput, MatSelectModule, MatFormFieldModule
+    RouterLink, MatFormField, MatLabel, MatInput, MatSelectModule, MatFormFieldModule, MatIconModule
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
