@@ -51,7 +51,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "//PageKeeper/page-keeper/"
+              "baseHref": "//PageKeeper/browser/"
             },
             "development": {
               "optimization": false,
