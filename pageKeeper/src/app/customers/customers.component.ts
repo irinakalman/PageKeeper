@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms'; // add this for ngModel
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { Customer } from '../types/customers';
 
 @Component({
   selector: 'app-customers',
@@ -39,8 +40,8 @@ export class CustomersComponent implements OnInit {
     'phoneNumber',
     'actions',
   ];
-  customers: any[] = [];
-  filteredCustomers: any[] = []; //define filteredCustomers
+  customers: Customer[] = [];
+  filteredCustomers: Customer[] = []; //define filteredCustomers
   searchTerm: string = ''; //define searchTerm
   sortOrder: string = 'asc'; //sort order
 
@@ -54,8 +55,9 @@ export class CustomersComponent implements OnInit {
   }
 
   loadCustomers() {
-    this.customerService.getCustomers().subscribe((data: any) => {
+    this.customerService.getCustomers().subscribe((data: Customer[]) => {
       this.customers = data;
+      console.log(data)
       this.filterCustomers();
     });
   }
@@ -78,16 +80,17 @@ export class CustomersComponent implements OnInit {
     this.router.navigate(['/new-customer']);
   }
 
-  viewCustomer(customer: any) {
+  viewCustomer(customer: Customer) {
+    console.log(customer._id)
     this.router.navigate(['/customers/view', customer._id]);
   }
 
-  editCustomer(customer: any) {
+  editCustomer(customer: Customer) {
     this.router.navigate(['/customers/edit', customer._id]);
   }
 
-  deleteCustomer(customer: any) {
-    if (
+  deleteCustomer(customer: Customer) {
+    if ( customer._id &&
       confirm(
         `Are you sure you want to delete ${customer.name} ${customer.surname}?`
       )

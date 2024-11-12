@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Reservation } from '../../types/reservation';
 import { ReservationsService } from '../../services/reservations.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Book } from '../../types/books';
+import { Customer } from '../../types/customers';
 
 @Component({
   selector: 'app-reservation-form',
@@ -42,8 +44,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 })
 export class ReservationFormComponent implements OnInit {
   myForm!: FormGroup;
-  books: any[] = [];
-  customers: any[] = [];
+  books: Book[] = [];
+  customers: Customer[] = [];
   isEditMode = false;
   viewOnlyMode = false;
   selectedBookId: string | null = null; //home buttons
@@ -80,12 +82,12 @@ export class ReservationFormComponent implements OnInit {
       this.myForm.patchValue({ bookId: this.selectedBookId });
     }
 
-    this.bookService.getBooks().subscribe((books: any[]) => {
+    this.bookService.getBooks().subscribe((books: Book[]) => {
       this.books = books.filter((book) => book.available);
       console.log('books:', this.books);
     });
 
-    this.customerService.getCustomers().subscribe((customers: any[]) => {
+    this.customerService.getCustomers().subscribe((customers: Customer[]) => {
       this.customers = customers;
       console.log('customers', this.customers);
     });

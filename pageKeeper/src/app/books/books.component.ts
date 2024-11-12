@@ -8,6 +8,7 @@ import {  Router, RouterLink } from '@angular/router';
 import { MatFormField, MatFormFieldModule, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { Book } from '../types/books';
 
 @Component({
   selector: 'app-books',
@@ -31,8 +32,8 @@ export class BooksComponent implements OnInit {
     'createdOn',
     'actions',
   ];
-  dataSource: any[] = [];
-  selectedBook: any = null;
+  dataSource: Book[] = [];
+  selectedBook: Book | null = null;
   isViewMode = false;
   isEditMode = false;
   showForm = false;
@@ -46,17 +47,9 @@ export class BooksComponent implements OnInit {
   }
 
   loadBooks(): void {
-    this.bookService.getBooks(this.searchTerm, this.sortOrder).subscribe((books: any[]) => {
+    this.bookService.getBooks(this.searchTerm, this.sortOrder).subscribe((books: Book[]) => {
       console.log(books);
-      this.dataSource = books.map((book) => ({
-        bookName: book.name,
-        bookYear: book.year,
-        bookType: book.type,
-        bookAuthor: book.author,
-        createdOn: book.createdOn,
-        bookId: book._id,
-      }));
-      //console.log(books);
+      this.dataSource = books;
     });
   }
 
@@ -75,14 +68,14 @@ export class BooksComponent implements OnInit {
   //  this.router.navigate(['/books/new'])
   // }
 
-  editBook(book: any): void {
-    this.router.navigate(['/books/edit', book.bookId])
+  editBook(book: Book): void {
+    this.router.navigate(['/books/edit', book._id])
   }
 
-  viewBook(book: any): void {
+  viewBook(book: Book): void {
     console.log(book)
-    console.log(book.bookId)
-    this.router.navigate(['/books/view', book.bookId])
+    console.log(book._id)
+    this.router.navigate(['/books/view', book._id])
   }
 
   deleteBook(bookId: string): void{
@@ -97,9 +90,9 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  handleSave(bookData: any): void {
+  handleSave(bookData: Book): void {
     if (this.isEditMode && this.selectedBook){
-      this.bookService.updateBook(this.selectedBook.id, bookData).subscribe({
+      this.bookService.updateBook(this.selectedBook?._id!, bookData).subscribe({
         next: () => {
           console.log('book updated successfully');
           this.loadBooks();

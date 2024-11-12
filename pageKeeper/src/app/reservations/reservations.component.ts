@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { Router, RouterLink } from '@angular/router';
+import { Reservation } from '../types/reservation';
 
 @Component({
   selector: 'app-reservations',
@@ -22,7 +23,7 @@ export class ReservationsComponent implements OnInit {
     'returnBy',
     'actions',
   ];
-  dataSource: any[] = [];
+  dataSource: Reservation[] = [];
 
   constructor(private reservationService: ReservationsService, private router: Router) {}
 
@@ -34,28 +35,21 @@ export class ReservationsComponent implements OnInit {
   loadReservations(): void {
     this.reservationService
     .getReservations()
-    .subscribe((reservations: any[]) => {
+    .subscribe((reservations: Reservation[]) => {
       const activeReservations = reservations.filter(
         (reservation) => reservation.book?.available === false && reservation.status !== 'completed'
       );
 
       console.log('active reservations:', activeReservations)
 
-      this.dataSource = activeReservations.map((reservation) => ({
-        id: reservation._id,
-        bookName: reservation.book?.name,
-        customerName: reservation.customer?.name,
-        status: reservation.status,
-        reservedOn: reservation.reservedOn,
-        returnBy: reservation.returnBy,
-      }));
+      this.dataSource = activeReservations
     });
   }
 
 
-  completeReservation(reservation: any): void {
-    if(confirm('Are you sure you want to complete this reservation?')){
-      this.reservationService.completeReservation(reservation.id).subscribe({
+  completeReservation(reservation: Reservation): void {
+    if(reservation._id && confirm('Are you sure you want to complete this reservation?')){
+      this.reservationService.completeReservation(reservation._id).subscribe({
         next: () => {
           console.log('reservation completed');
           this.loadReservations()

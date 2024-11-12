@@ -1,5 +1,6 @@
 export interface Book {
-  id?: string;
+  _id?: string;
+  available?: boolean;
   name: string;
   year: string;
   type: string;

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { Book } from '../types/books';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  availableBooks: any[] = [];
+  availableBooks: Book[] = [];
   displayedColumns: string[] = [
     'name',
     'year',
@@ -27,10 +28,11 @@ export class HomeComponent implements OnInit {
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((books: any) => {
+    this.bookService.getBooks().subscribe((books: Book[]) => {
       //fiter available books
+      console.log(books)
       this.availableBooks = books.filter(
-        (book: any) => book.available === true
+        (book: Book) => book.available === true
       );
     });
   }

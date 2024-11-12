@@ -14,13 +14,13 @@
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
       <th mat-header-cell *matHeaderCellDef>Book Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookName }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.book.name }}</td>
     </ng-container>
 
     <!-- Customer Name Column -->
     <ng-container matColumnDef="customerName">
       <th mat-header-cell *matHeaderCellDef>Customer Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.customerName }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.customer.name }}</td>
     </ng-container>
 
     <!-- Status Column -->

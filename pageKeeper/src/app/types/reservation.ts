@@ -2,10 +2,10 @@ import { Book } from "./books";
 import { Customer } from "./customers";
 
 export interface Reservation {
-  id?: string;
+  _id?: string;
   customer?: Customer;
   book: Book;
-  returnBY?: Date;
+  returnBy?: Date;
   status: string;
   reservedOn: Date
 }
