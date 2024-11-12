@@ -71,7 +71,9 @@
           class="primary-button"
           (click)="viewBook(element)"
         >
-         <img src="assets/images/view.png" alt="View icon">
+        <span class="material-symbols-outlined">
+          visibility
+          </span>
         </button>
         <button
           mat-raised-button
@@ -79,7 +81,9 @@
           class="secondary-button edit"
           (click)="editBook(element)"
         >
-        <img src="assets/images/editing.png" alt="Edit icon">
+        <span class="material-symbols-outlined">
+          edit_square
+          </span>
         </button>
         <button
           mat-raised-button
@@ -87,7 +91,9 @@
           class="warn-button delete"
           (click)="deleteBook(element.bookId)"
         >
-        <img src="assets/images/delete.png" alt="Delete icon">
+        <span class="material-symbols-outlined">
+          delete
+          </span>
         </button>
       </td>
     </ng-container>

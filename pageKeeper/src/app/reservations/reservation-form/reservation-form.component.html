@@ -1,6 +1,7 @@
 <a class="back-btn" routerLink="/reservations"
-  ><img src="assets/images/back-button.png" alt=""
-/></a>
+  ><img src="assets/images/back-button.png" alt="back button"
+/>
+<img class="d-none" src="assets/images/back-button-white.png" alt="back button"></a>
 <h1>Add new reservation</h1>
 <form class="global-form" [formGroup]="myForm" (ngSubmit)="addReservation()">
   <mat-form-field appearance="outline" *ngIf="customers.length > 0">

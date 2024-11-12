@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    RouterLink,
+    RouterLink
   ],
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.scss'],
